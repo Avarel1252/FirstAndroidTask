@@ -14,35 +14,49 @@ class AuthActivity : AppCompatActivity() {
     private lateinit var allAccounts: SharedPreferences
     private lateinit var rememberedAccount: SharedPreferences
     private lateinit var rememberedAccountEditor: SharedPreferences.Editor
+    private lateinit var intent1: Intent
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bind = SignupBinding.inflate(layoutInflater)
+        setContentView(bind.root)
+
         allAccounts = getSharedPreferences("allAccounts", MODE_PRIVATE)
         rememberedAccount = getSharedPreferences("rememberedAccounts", MODE_PRIVATE)
         rememberedAccountEditor = rememberedAccount.edit()
-        setContentView(bind.root)
+        intent1 = Intent(applicationContext, MyProfileActivity::class.java)
+
         bind.tInEmail.editText?.setText(rememberedAccount.getString("email", ""))
         bind.tInPassword.editText?.setText(rememberedAccount.getString("password", ""))
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        rememberedAccountEditor.putString("email", bind.tInEmail.editText?.text.toString())
-        rememberedAccountEditor.putString("password", bind.tInPassword.editText?.text.toString())
-        rememberedAccountEditor.apply()
+        outState.putString("email", bind.tInEmail.editText?.text.toString())
+        outState.putString("password", bind.tInPassword.editText?.text.toString())
+    }
 
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        bind.tInEmail.editText?.setText(savedInstanceState.getString("email", ""))
+        bind.tInPassword.editText?.setText(savedInstanceState.getString("password", ""))
+    }
+
+    override fun onStop() {
+        super.onStop()
+        saveFieldsState()
     }
 
     fun signIn(view: View) {
-        if (checkUserReg()) {
-            intent.putExtra("email", bind.tInEmail.editText?.text.toString())
-            startActivity(Intent(applicationContext, MyProfileActivity::class.java))
+        val email = bind.tInEmail.editText?.text.toString()
+        val password = bind.tInPassword.editText?.text.toString()
+        if (checkUserReg(email, password)) {
+            intent1.putExtra("email", email)
+            startActivity(intent1)
         } else Toast.makeText(applicationContext, R.string.userNotReged, Toast.LENGTH_SHORT).show()
     }
 
-    private fun checkUserReg(): Boolean {
-        val email = bind.tInEmail.editText?.text.toString()
-        val password = bind.tInPassword.editText?.text.toString()
+    private fun checkUserReg(email: String, password: String): Boolean {
         if (allAccounts.contains(email)) {
             return allAccounts.getString(email, null) == password
         }
@@ -53,27 +67,28 @@ class AuthActivity : AppCompatActivity() {
         val allAccountsEditor = allAccounts.edit()
         val email = bind.tInEmail.editText?.text.toString()
         val password = bind.tInPassword.editText?.text.toString()
-        val intent = Intent(applicationContext, MyProfileActivity::class.java)
         if (isValidEmail(email) && isValidPassword(password)) {
-            saveFieldsState(email, password)
             if (allAccounts.contains(email)) {
                 Toast.makeText(applicationContext, R.string.usedEmail, Toast.LENGTH_SHORT).show()
             } else {
                 allAccountsEditor.putString(email, password)
                 allAccountsEditor.apply()
-                startActivity(intent)
+                intent1.putExtra("email", email)
+                startActivity(intent1)
+
             }
         }
 
     }
 
-    private fun saveFieldsState(email: String, password: String) {
+    private fun saveFieldsState() {
         if (bind.chkBoxRememberMe.isChecked) {
-            Toast.makeText(applicationContext, "checked", Toast.LENGTH_SHORT).show()
-            rememberedAccountEditor.putString("email", email)
-            rememberedAccountEditor.putString("password", password)
+            rememberedAccountEditor.putString("email", bind.tInEmail.editText?.text.toString())
+            rememberedAccountEditor.putString(
+                "password",
+                bind.tInPassword.editText?.text.toString()
+            )
         } else {
-            Toast.makeText(applicationContext, "unchecked", Toast.LENGTH_SHORT).show()
             rememberedAccountEditor.putString("email", "")
             rememberedAccountEditor.putString("password", "")
         }
@@ -81,11 +96,11 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun isValidEmail(str: String): Boolean {
-        val patternEmail = Regex(pattern = "[a-zA-Z]+.[a-zA-Z]+@[a-zA-Z]+.[a-zA-Z]+")
+        val patternEmail = Regex(pattern = "[a-zA-Z]+\\.[a-zA-Z]+@[a-zA-Z]+\\.[a-zA-Z]+")
         if (str.isEmpty()) {
-            bind.tInEmail.error = R.string.empty_email.toString()
+            bind.tInEmail.error = resources.getString(R.string.empty_email)
         } else if (!patternEmail.matches(str)) {
-            bind.tInEmail.error = R.string.invalid_email.toString()
+            bind.tInEmail.error = resources.getString(R.string.invalid_email)
         } else return true
         return false
     }
@@ -93,9 +108,9 @@ class AuthActivity : AppCompatActivity() {
     private fun isValidPassword(str: String): Boolean {
         val pattern = Regex(pattern = "[a-zA-Z0-9_]+")
         if (str.isEmpty()) {
-            bind.tInPassword.error = R.string.empty_password.toString()
+            bind.tInPassword.error = resources.getString(R.string.empty_password)
         } else if (!pattern.matches(str)) {
-            bind.tInPassword.error = R.string.invalid_password.toString()
+            bind.tInPassword.error = resources.getString(R.string.invalid_password)
         } else return true
         return false
     }

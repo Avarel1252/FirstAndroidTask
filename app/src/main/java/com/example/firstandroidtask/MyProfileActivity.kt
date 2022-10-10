@@ -13,16 +13,15 @@ class MyProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bind = MyProfileBinding.inflate(layoutInflater)
         setContentView(bind.root)
-        setUsenameText()
+        setUsernameText()
 
     }
 
-    private fun setUsenameText() {
-        val extra: String = intent.getStringExtra("email") ?: ""
-        val namePattern = Regex(pattern = "([a-zA-Z]+.)")
-        val surnamePattern = Regex(pattern = "(.[a-zA-Z]+)")
-        val username =
-            namePattern.find(extra).toString() + " " + surnamePattern.find(extra).toString()
+    private fun setUsernameText() {
+        val extra: String = intent.getStringExtra("email")!!
+        val name = extra.substringBefore(".")
+        val surname = extra.substringAfter(".").substringBefore("@")
+        val username = "$name $surname"
         bind.tvUsername.text = username
     }
 }

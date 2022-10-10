@@ -10,6 +10,6 @@
     <dimen name="border_for_conditions">0dp</dimen>
     <dimen name="corner_radius">6dp</dimen>
     <dimen name="strokeWidth">2dp</dimen>
-    <dimen name="buttonHeight">35dp</dimen>
+    <dimen name="buttonHeight">50dp</dimen>
     <dimen name="button_radius">60dp</dimen>
 </resources>
