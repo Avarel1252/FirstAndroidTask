@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/activity_horizontal_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_topWindow"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?attr/backgroundColor"
+        android:duplicateParentState="false"
+        android:orientation="vertical"
+        android:padding="@dimen/tv_vertical_gap"
+        app:constraint_referenced_ids="tv_settings,flow_accInfo"
+        app:flow_verticalGap="@dimen/tv_vertical_gap"
+
+        app:layout_constraintBottom_toTopOf="@id/flow_botWindow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_accInfo"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="iv_acc,tv_username,tv_career,tv_homeAddress"
+        app:flow_verticalGap="@dimen/tv_vertical_gap"
+        app:flow_verticalStyle="packed" />
+
+    <TextView
+        android:id="@+id/tv_settings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/tv_vertical_gap"
+        android:text="@string/settings_label"
+        android:textAppearance="@style/Text.Header"
+        android:textColor="?attr/mainTextColor" />
+
+    <ImageView
+
+        android:id="@+id/iv_acc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/account_circle" />
+
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="user name"
+        android:textAppearance="@style/Text.Input"
+        android:textColor="?attr/mainTextColor" />
+
+    <TextView
+        android:id="@+id/tv_career"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/career_default"
+        android:textAppearance="@style/Text.Body2"
+        android:textColor="?attr/secondaryHintTextColor" />
+
+    <TextView
+        android:id="@+id/tv_homeAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/address_default"
+        android:textAppearance="@style/Text.Body2"
+        android:textColor="?attr/secondaryHintTextColor" />
+
+    <View
+        android:id="@+id/btn_fb"
+        android:layout_width="@dimen/button_radius"
+        android:layout_height="@dimen/button_radius"
+        android:background="@drawable/ellipse"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="@drawable/fb_logo"
+        android:foregroundGravity="center" />
+
+    <View
+        android:id="@+id/btn_in"
+        android:layout_width="@dimen/button_radius"
+        android:layout_height="@dimen/button_radius"
+        android:background="@drawable/ellipse"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="@drawable/in_logo"
+        android:foregroundGravity="center" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_circleBtn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:constraint_referenced_ids="btn_fb,btn_in" />
+
+    <TextView
+        android:id="@+id/tv_editHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/actionHint_forEditBtn"
+        android:textAppearance="@style/Text.Body2"
+        android:textColor="@color/gray_text1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_editProfile"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/editBtn_txt"
+        android:textAppearance="@style/Text.Body2"
+        android:textColor="@color/gray_text1"
+        app:cornerRadius="@dimen/corner_radius"
+        app:strokeColor="@color/gray_text2"
+        app:strokeWidth="@dimen/strokeWidth" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_contacts"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/buttonHeight"
+        android:backgroundTint="@color/orange"
+        android:text="@string/contactsBtn_txt"
+        android:textAllCaps="true"
+        android:textAppearance="@style/Text.Input"
+        app:cornerRadius="@dimen/corner_radius" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_rectBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="tv_editHint,btn_editProfile,btn_contacts"
+        app:flow_verticalGap="@dimen/tv_vertical_gap"
+        app:flow_verticalStyle="packed" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_botWindow"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="flow_circleBtn,flow_rectBtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/gl_end"
+        app:layout_constraintStart_toEndOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/flow_topWindow" />
+</androidx.constraintlayout.widget.ConstraintLayout>

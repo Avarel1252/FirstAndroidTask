@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundColor">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/activity_horizontal_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/activity_horizontal_margin" />
+
+
+    <TextView
+        android:id="@+id/tv_mainLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_label"
+        android:textAppearance="@style/Text.Header"
+        android:textColor="?attr/mainTextColor" />
+
+    <TextView
+        android:id="@+id/tv_actionHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/actionHint"
+        android:textAppearance="@style/Text.Body3"
+        android:textColor="?attr/mainTextColor" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="tv_mainLabel,tv_actionHint"
+        app:flow_verticalGap="@dimen/tv_vertical_gap"
+        app:layout_constraintBottom_toTopOf="@id/flow_fields"
+        app:layout_constraintEnd_toStartOf="@id/gl_end"
+        app:layout_constraintStart_toEndOf="@id/gl_start"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tIn_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textAppearance="@style/Text.Input"
+            android:textColor="?attr/mainTextColor" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tIn_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textAppearance="@style/Text.Input"
+            android:textColor="?attr/mainTextColor" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/chkBox_rememberMe"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/checkBox_txt"
+        android:textAppearance="@style/Text.Body2"
+        android:textColor="?attr/secondaryHintTextColor" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_fields"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="tIn_email,tIn_password,chkBox_rememberMe"
+        app:flow_verticalGap="@dimen/fields_gap"
+        app:layout_constraintBottom_toTopOf="@id/flow_buttons"
+        app:layout_constraintEnd_toStartOf="@id/gl_end"
+        app:layout_constraintStart_toEndOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/flow_label" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_googleReg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:text="@string/googleReg_txt"
+        android:textAllCaps="true"
+        android:textAppearance="@style/Text.Body1"
+        android:textColor="@color/gray_text1"
+        app:cornerRadius="@dimen/corner_radius" />
+
+    <TextView
+        android:id="@+id/tv_or"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/or"
+        android:textAppearance="@style/Text.Input"
+        android:textColor="?attr/mainTextColor" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_reg"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/reg_txt"
+        android:textAllCaps="true"
+        android:textAppearance="@style/Text.Body1"
+        android:textColor="?attr/mainTextColor"
+        app:strokeColor="@color/orange"
+        app:strokeWidth="@dimen/strokeWidth" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_regButtons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="registration"
+        app:constraint_referenced_ids="btn_reg,tv_or,btn_googleReg"
+        app:flow_horizontalGap="@dimen/tv_horizontal_gap" />
+
+    <TextView
+        android:id="@+id/tv_conditions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/border_for_conditions"
+        android:text="@string/conditions_txt"
+        android:textAlignment="center"
+        android:textAppearance="@style/Text.Body3"
+        android:textColor="?attr/mainTextColor" />
+
+    <TextView
+        android:id="@+id/tv_haveAcc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/haveAccount_txt"
+        android:textAppearance="@style/Text.Body2"
+        android:textColor="?attr/secondaryHintTextColor" />
+
+    <TextView
+        android:id="@+id/tv_signIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="signIn"
+        android:text="@string/signIn_txt"
+        android:textAppearance="@style/Text.Body2"
+        android:textColor="?attr/secondaryTextColor" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_belowRegBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tv_haveAcc,tv_signIn"
+        app:flow_horizontalGap="@dimen/tv_horizontal_gap"
+        app:flow_horizontalStyle="packed" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:constraint_referenced_ids="flow_regButtons,tv_conditions,flow_belowRegBtn"
+        app:flow_verticalGap="@dimen/buttons_gap"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/gl_end"
+        app:layout_constraintStart_toEndOf="@id/gl_start"
+        app:layout_constraintTop_toBottomOf="@id/flow_fields" />
+</androidx.constraintlayout.widget.ConstraintLayout>

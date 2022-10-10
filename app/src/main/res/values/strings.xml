@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">First task</string>
+    <string name="main_label">Let\'s get acquainted</string>
+    <string name="actionHint">Fill out the profile and go to the application</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="checkBox_txt">Remember me</string>
+    <string name="googleReg_txt">google</string>
+    <string name="or">or</string>
+    <string name="reg_txt">register</string>
+    <string name="conditions_txt">By clicking Register you agree to our Terms and Conditions</string>
+    <string name="haveAccount_txt">Already have an account?</string>
+    <string name="signIn_txt">Sign in</string>
+    <string name="settings_label">Settings</string>
+    <string name="career_default">Career</string>
+    <string name="address_default">Home address</string>
+    <string name="actionHint_forEditBtn">Go to settings and fill out the profile</string>
+    <string name="editBtn_txt">Edit profile</string>
+    <string name="contactsBtn_txt">view my contacts</string>
+    <string name="empty_email">email address is empty</string>
+    <string name="empty_password">password is empty</string>
+    <string name="invalid_email">invalid email address</string>
+    <string name="invalid_password">invalid password</string>
+    <string name="usedEmail">This email address has already been used</string>
+    <string name="userNotReged">the user is not registered or password wrong</string>
+</resources>

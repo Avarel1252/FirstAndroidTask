@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_bot_margin">16dp</dimen>
+    <dimen name="activity_top_margin">16dp</dimen>
+    <dimen name="tv_vertical_gap">8dp</dimen>
+    <dimen name="fields_gap">24dp</dimen>
+    <dimen name="buttons_gap">8dp</dimen>
+    <dimen name="tv_horizontal_gap">12dp</dimen>
+    <dimen name="border_for_conditions">60dp</dimen>
+    <dimen name="corner_radius">6dp</dimen>
+    <dimen name="strokeWidth">2dp</dimen>
+    <dimen name="buttonHeight">50dp</dimen>
+    <dimen name="button_radius">60dp</dimen>
+</resources>

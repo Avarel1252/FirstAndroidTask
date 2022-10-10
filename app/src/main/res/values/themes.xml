@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <attr name="backgroundColor" format="color" />
+    <attr name="backgroundSecondaryColor" format="color" />
+    <attr name="mainTextColor" format="color" />
+    <attr name="secondaryTextColor" format="color" />
+    <attr name="hintTextColor" format="color" />
+    <attr name="secondaryHintTextColor" format="color" />
+    <attr name="inputTextColor" format="color" />
+    <attr name="errorTextColor" format="color" />
+    <attr name="cancelStrokeColor" format="color" />
+
+    <style name="Theme.FirstAndroidTask" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="backgroundColor">@color/blueLight</item>
+        <item name="backgroundSecondaryColor">@color/gray_back</item>
+        <item name="mainTextColor">@color/gray_text1</item>
+        <item name="secondaryTextColor">@color/gray_text1</item>
+        <item name="hintTextColor">@color/gray_text4</item>
+        <item name="secondaryHintTextColor">@color/gray_text3</item>
+        <item name="inputTextColor">@color/gray_text1</item>
+        <item name="cancelStrokeColor">@color/gray_text2</item>
+        <item name="errorTextColor">@color/errorLight</item>
+
+    </style>
+</resources>

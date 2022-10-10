@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Перше завдання</string>
+    <string name="main_label">Давай знайомитись</string>
+    <string name="actionHint">Заповніть профіль і перейдіть до програми</string>
+    <string name="email">Електронна адреса</string>
+    <string name="password">Пароль</string>
+    <string name="checkBox_txt">Запам\'ятати мене</string>
+    <string name="googleReg_txt">google</string>
+    <string name="or">або</string>
+    <string name="reg_txt">реєстрація</string>
+    <string name="conditions_txt">Натиснувши «Зареєструватися», ви погоджуєтеся з нашими Умовами</string>
+    <string name="haveAccount_txt">Вже є аккаунт?</string>
+    <string name="signIn_txt">Увійти</string>
+    <string name="settings_label">Налаштування</string>
+    <string name="career_default">Кар\'єра</string>
+    <string name="address_default">Домашня адреса</string>
+    <string name="actionHint_forEditBtn">Зайдіть в налаштування і заповніть профіль</string>
+    <string name="editBtn_txt">Редагувати профіль</string>
+    <string name="contactsBtn_txt">переглянути мої контакти</string>
+    <string name="empty_email">порожня електронна адреса</string>
+    <string name="empty_password">порожній пароль</string>
+    <string name="invalid_email">електронна адреса недійсна</string>
+    <string name="invalid_password">пароль недійсний</string>
+    <string name="usedEmail">Ця електронна пошта вже була використана</string>
+    <string name="userNotReged">Користувач не зареєстрований або неправильний пароль</string>
+</resources>
