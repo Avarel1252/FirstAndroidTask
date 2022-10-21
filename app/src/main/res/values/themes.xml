@@ -12,6 +12,7 @@
 
     <style name="Theme.FirstAndroidTask" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
+
         <item name="backgroundColor">@color/blueLight</item>
         <item name="backgroundSecondaryColor">@color/gray_back</item>
         <item name="mainTextColor">@color/gray_text1</item>
@@ -21,6 +22,5 @@
         <item name="inputTextColor">@color/gray_text1</item>
         <item name="cancelStrokeColor">@color/gray_text2</item>
         <item name="errorTextColor">@color/errorLight</item>
-
     </style>
 </resources>

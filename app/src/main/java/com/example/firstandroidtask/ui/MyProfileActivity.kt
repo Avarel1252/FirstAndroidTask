@@ -1,8 +1,8 @@
-package com.example.firstandroidtask
+package com.example.firstandroidtask.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import com.example.firstandroidtask.R
 import com.example.firstandroidtask.databinding.MyProfileBinding
 
 class MyProfileActivity : AppCompatActivity() {
@@ -18,10 +18,15 @@ class MyProfileActivity : AppCompatActivity() {
     }
 
     private fun setUsernameText() {
-        val extra: String = intent.getStringExtra("email")!!
-        val name = extra.substringBefore(".")
-        val surname = extra.substringAfter(".").substringBefore("@")
-        val username = "$name $surname"
-        bind.tvUsername.text = username
+        val email: String = intent.getStringExtra("email")!!
+        val name = parseUserName(email)
+
+        bind.tvUsername.text = getString(R.string.userName, name.first, name.second)
+    }
+
+    private fun parseUserName(email: String): Pair<String, String> {
+        val name = email.substringBefore(".")
+        val surname = email.substringAfter(".").substringBefore("@")
+        return Pair(name, surname)
     }
 }

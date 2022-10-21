@@ -29,7 +29,6 @@
         android:padding="@dimen/tv_vertical_gap"
         app:constraint_referenced_ids="tv_settings,flow_accInfo"
         app:flow_verticalGap="@dimen/tv_vertical_gap"
-
         app:layout_constraintBottom_toTopOf="@id/flow_botWindow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
