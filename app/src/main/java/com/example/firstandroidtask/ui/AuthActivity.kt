@@ -1,10 +1,11 @@
-package com.example.firstandroidtask
+package com.example.firstandroidtask.ui
 
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.firstandroidtask.R
 import com.example.firstandroidtask.databinding.ActivityAuthBinding
 import com.example.firstandroidtask.utils.Constants
 import com.example.firstandroidtask.utils.Verificator

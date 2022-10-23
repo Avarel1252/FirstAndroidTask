@@ -1,7 +1,8 @@
-package com.example.firstandroidtask
+package com.example.firstandroidtask.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.firstandroidtask.R
 import com.example.firstandroidtask.databinding.ActivityMyProfileBinding
 import com.example.firstandroidtask.utils.ParseData
 
