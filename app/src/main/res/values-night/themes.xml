@@ -10,10 +10,8 @@
     <attr name="errorTextColor" format="color" />
     <attr name="cancelStrokeColor" format="color" />
 
-
     <style name="Theme.FirstAndroidTask" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-
         <item name="backgroundColor">@color/blue</item>
         <item name="backgroundSecondaryColor">@color/gray_back</item>
         <item name="mainTextColor">@color/white</item>
@@ -24,5 +22,4 @@
         <item name="cancelStrokeColor">@color/white</item>
         <item name="errorTextColor">@color/errorLight</item>
     </style>
-
 </resources>

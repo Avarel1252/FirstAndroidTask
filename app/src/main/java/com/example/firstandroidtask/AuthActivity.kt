@@ -4,42 +4,64 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.firstandroidtask.databinding.SignupBinding
+import com.example.firstandroidtask.databinding.ActivityAuthBinding
+import com.example.firstandroidtask.utils.Constants
+import com.example.firstandroidtask.utils.Verificator
+import com.example.firstandroidtask.utils.extensions.shortToast
 
 
 class AuthActivity : AppCompatActivity() {
-    private lateinit var bind: SignupBinding
-    private lateinit var allAccounts: SharedPreferences
+    private lateinit var binding: ActivityAuthBinding
+    private lateinit var allAccountsPref: SharedPreferences
     private lateinit var rememberedAccount: SharedPreferences
-    private lateinit var rememberedAccountEditor: SharedPreferences.Editor
-    private lateinit var intent1: Intent
+    private lateinit var launchProfileActivityIntent: Intent
+    private lateinit var verificator: Verificator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bind = SignupBinding.inflate(layoutInflater)
-        setContentView(bind.root)
+        binding = ActivityAuthBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        allAccounts = getSharedPreferences("allAccounts", MODE_PRIVATE)
+        init()
+        credentialsAutoFill()
+    }
+
+    private fun credentialsAutoFill() {
+        with(binding) {
+            etEmail?.setText(
+                rememberedAccount.getString(Constants.SHARED_PREF_EMAIL_KEY, "")
+            )
+            etPassword?.setText(
+                rememberedAccount.getString(Constants.SHARED_PREF_PASSWORD_KEY, "")
+            )
+        }
+
+    }
+
+    private fun init() {
+        verificator = Verificator()
+        allAccountsPref = getSharedPreferences("allAccounts", MODE_PRIVATE)
         rememberedAccount = getSharedPreferences("rememberedAccounts", MODE_PRIVATE)
-        rememberedAccountEditor = rememberedAccount.edit()
-        intent1 = Intent(applicationContext, MyProfileActivity::class.java)
-
-        bind.tInEmail.editText?.setText(rememberedAccount.getString("email", ""))
-        bind.tInPassword.editText?.setText(rememberedAccount.getString("password", ""))
+        launchProfileActivityIntent = Intent(applicationContext, MyProfileActivity::class.java)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putString("email", bind.tInEmail.editText?.text.toString())
-        outState.putString("password", bind.tInPassword.editText?.text.toString())
+
+        with(outState) {
+            putString(Constants.EMAIL_BUNDLE_KEY, binding.etEmail?.text.toString())
+            putString(Constants.PASSWORD_BUNDLE_KEY, binding.etPassword?.text.toString())
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        bind.tInEmail.editText?.setText(savedInstanceState.getString("email", ""))
-        bind.tInPassword.editText?.setText(savedInstanceState.getString("password", ""))
+
+        with(binding) {
+            etEmail?.setText(savedInstanceState.getString(Constants.EMAIL_BUNDLE_KEY, ""))
+            etPassword?.setText(savedInstanceState.getString(Constants.PASSWORD_BUNDLE_KEY, ""))
+        }
     }
 
     override fun onStop() {
@@ -48,70 +70,57 @@ class AuthActivity : AppCompatActivity() {
     }
 
     fun signIn(view: View) {
-        val email = bind.tInEmail.editText?.text.toString()
-        val password = bind.tInPassword.editText?.text.toString()
-        if (checkUserReg(email, password)) {
-            intent1.putExtra("email", email)
-            startActivity(intent1)
-        } else Toast.makeText(applicationContext, R.string.userNotReged, Toast.LENGTH_SHORT).show()
+        val email = binding.etEmail?.text.toString()
+        val password = binding.etPassword?.text.toString()
+
+        if (verificator.checkUserReg(allAccountsPref, email, password)) {
+            launchProfileActivityIntent.putExtra(Constants.EXTRA_EMAIL_KEY, email)
+            startActivity(launchProfileActivityIntent)
+        } else {
+            shortToast(R.string.userNotReged)
+        }
     }
 
-    private fun checkUserReg(email: String, password: String): Boolean {
-        if (allAccounts.contains(email)) {
-            return allAccounts.getString(email, null) == password
-        }
-        return false
-    }
 
     fun registration(view: View) {
-        val allAccountsEditor = allAccounts.edit()
-        val email = bind.tInEmail.editText?.text.toString()
-        val password = bind.tInPassword.editText?.text.toString()
-        if (isValidEmail(email) && isValidPassword(password)) {
-            if (allAccounts.contains(email)) {
-                Toast.makeText(applicationContext, R.string.usedEmail, Toast.LENGTH_SHORT).show()
-            } else {
-                allAccountsEditor.putString(email, password)
-                allAccountsEditor.apply()
-                intent1.putExtra("email", email)
-                startActivity(intent1)
+        val allAccountsPrefEditor = allAccountsPref.edit()
+        val email = binding.etEmail?.text.toString()
+        val password = binding.etPassword?.text.toString()
 
+        val emailValid =
+            verificator.isValidEmail(email)?.let { binding.tInEmail.error = getString(it) }
+        val passwordValid =
+            verificator.isValidPassword(password)?.let { binding.tInPassword.error = getString(it) }
+
+        if (emailValid == null && passwordValid == null) {
+            if (allAccountsPref.contains(email)) {
+                shortToast(R.string.usedEmail)
+            } else {
+                allAccountsPrefEditor.putString(email, password)
+                allAccountsPrefEditor.apply()
+                launchProfileActivityIntent.putExtra(Constants.EXTRA_EMAIL_KEY, email)
+                startActivity(launchProfileActivityIntent)
             }
         }
-
     }
 
     private fun saveFieldsState() {
-        if (bind.chkBoxRememberMe.isChecked) {
-            rememberedAccountEditor.putString("email", bind.tInEmail.editText?.text.toString())
-            rememberedAccountEditor.putString(
-                "password",
-                bind.tInPassword.editText?.text.toString()
-            )
-        } else {
-            rememberedAccountEditor.putString("email", "")
-            rememberedAccountEditor.putString("password", "")
+        with(rememberedAccount.edit()) {
+            if (binding.chkBoxRememberMe.isChecked) {
+                putString(
+                    Constants.SHARED_PREF_EMAIL_KEY,
+                    binding.etEmail?.text.toString()
+                )
+                putString(
+                    Constants.SHARED_PREF_PASSWORD_KEY,
+                    binding.etPassword?.text.toString()
+                )
+            } else {
+                clear()
+            }
+            apply()
         }
-        rememberedAccountEditor.apply()
     }
 
-    private fun isValidEmail(str: String): Boolean {
-        val patternEmail = Regex(pattern = "[a-zA-Z]+\\.[a-zA-Z]+@[a-zA-Z]+\\.[a-zA-Z]+")
-        if (str.isEmpty()) {
-            bind.tInEmail.error = resources.getString(R.string.empty_email)
-        } else if (!patternEmail.matches(str)) {
-            bind.tInEmail.error = resources.getString(R.string.invalid_email)
-        } else return true
-        return false
-    }
 
-    private fun isValidPassword(str: String): Boolean {
-        val pattern = Regex(pattern = "[a-zA-Z0-9_]+")
-        if (str.isEmpty()) {
-            bind.tInPassword.error = resources.getString(R.string.empty_password)
-        } else if (!pattern.matches(str)) {
-            bind.tInPassword.error = resources.getString(R.string.invalid_password)
-        } else return true
-        return false
-    }
 }

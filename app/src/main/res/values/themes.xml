@@ -21,6 +21,5 @@
         <item name="inputTextColor">@color/gray_text1</item>
         <item name="cancelStrokeColor">@color/gray_text2</item>
         <item name="errorTextColor">@color/errorLight</item>
-
     </style>
 </resources>
