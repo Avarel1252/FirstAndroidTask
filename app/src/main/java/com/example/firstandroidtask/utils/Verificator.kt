@@ -3,7 +3,7 @@ package com.example.firstandroidtask.utils
 import android.content.SharedPreferences
 import com.example.firstandroidtask.R
 
-public class Verificator {
+class Verificator {
 
     // returns string res id, null if no error
     fun isValidEmail(str: String): Int? {

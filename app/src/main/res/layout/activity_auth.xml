@@ -110,24 +110,11 @@
         app:layout_constraintStart_toEndOf="@id/gl_start"
         app:layout_constraintTop_toBottomOf="@id/flow_label" />
 
-    <com.google.android.material.button.MaterialButton
+    <com.example.firstandroidtask.ui.CustomViewGoogleBtn
         android:id="@+id/btn_googleReg"
         android:layout_width="0dp"
-        android:layout_height="@dimen/buttonHeight"
-        android:backgroundTint="@color/white"
-        android:text="@string/googleReg_txt"
-        android:textAllCaps="true"
-        android:textAppearance="@style/Text.Body1"
-        android:textColor="@color/gray_text1"
-        app:cornerRadius="@dimen/corner_radius"
-        app:icon="@drawable/google_logo"
-        app:iconGravity="textStart"
-        app:iconPadding="@dimen/tv_horizontal_gap"
-        app:iconTint="@color/alpha0"
-        app:iconTintMode="add"
-
-
-        />
+        android:layout_height="wrap_content"
+        app:textSize="16sp" />
 
     <TextView
         android:id="@+id/tv_or"
